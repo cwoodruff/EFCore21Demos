@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Performance.EFCore
 {
@@ -6,8 +7,9 @@ namespace Performance.EFCore
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseLazyLoadingProxies().
-                UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;");
+            optionsBuilder.UseLazyLoadingProxies()
+                .UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;")
+                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -14,8 +14,10 @@ namespace Demos
 
             using (var db = new BloggingContext())
             {
-                var service = new BlogService(db);
-                var posts = db.Posts.GroupBy(o => new { o.CategoryId }).ToList();
+                var posts = db.Posts
+                    .GroupBy(o => new { o.CategoryId })
+                    .SelectMany(group => group)
+                    .ToList();
 
                 foreach (var post in posts)
                 {
@@ -34,9 +36,9 @@ namespace Demos
                 {
                     db.Blogs.Add(new Blog { Url = "http://sample.com/blogs/Dev" });
 
-                    db.Categories.Add(new Category {CategoryId = 1, Name = "Article"});
-                    db.Categories.Add(new Category {CategoryId = 2, Name = "Video"});
-                    db.Categories.Add(new Category {CategoryId = 3, Name = "Audio"});
+                    db.Categories.Add(new Category {Name = "Article"});
+                    db.Categories.Add(new Category {Name = "Video"});
+                    db.Categories.Add(new Category {Name = "Audio"});
 
                     db.Posts.Add(new Post {Title = "Article 1", CategoryId = 1});
                     db.Posts.Add(new Post {Title = "Video 1", CategoryId = 2});
@@ -62,6 +64,11 @@ namespace Demos
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            
+        }
+
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -71,7 +78,7 @@ namespace Demos
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer(
-                        @"Server=(localdb)\mssqllocaldb;Database=Demo.Like;Trusted_Connection=True;ConnectRetryCount=0")
+                        @"Server=(localdb)\mssqllocaldb;Database=Demo.GroupBy;Trusted_Connection=True;ConnectRetryCount=0")
                     .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));
             }
         }

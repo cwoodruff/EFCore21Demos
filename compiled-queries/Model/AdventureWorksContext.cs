@@ -6,7 +6,9 @@ namespace Performance.EFCore
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;");
+            optionsBuilder
+                .UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;")
+                .UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

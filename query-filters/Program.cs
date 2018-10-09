@@ -49,9 +49,9 @@ namespace Demos
                             Url = "http://sample.com/blogs/fish",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Fish care 101" },
-                                new Post { Title = "Caring for tropical fish" },
-                                new Post { Title = "Types of ornamental fish" }
+                                new Post { Title = "Fish care 101", IsDeleted = false },
+                                new Post { Title = "Caring for tropical fish", IsDeleted = false },
+                                new Post { Title = "Types of ornamental fish", IsDeleted = true }
                             }
                         });
 
@@ -61,9 +61,9 @@ namespace Demos
                             Url = "http://sample.com/blogs/cats",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Cat care 101" },
-                                new Post { Title = "Caring for tropical cats" },
-                                new Post { Title = "Types of ornamental cats" }
+                                new Post { Title = "Cat care 101", IsDeleted = true },
+                                new Post { Title = "Caring for tropical cats", IsDeleted = false },
+                                new Post { Title = "Types of ornamental cats", IsDeleted = false }
                             }
                         });
 
@@ -77,20 +77,20 @@ namespace Demos
                                 Url = "http://sample.com/blogs/catfish",
                                 Posts = new List<Post>
                                 {
-                                    new Post { Title = "Catfish care 101" },
-                                    new Post { Title = "History of the catfish name" }
+                                    new Post { Title = "Catfish care 101", IsDeleted = false },
+                                    new Post { Title = "History of the catfish name", IsDeleted = false }
                                 }
                             });
 
                         andrewDb.SaveChanges();
                     }
 
-                    db.Posts
-                        .Where(
-                            p => p.Title == "Caring for tropical fish"
-                                 || p.Title == "Cat care 101")
-                        .ToList()
-                        .ForEach(p => db.Posts.Remove(p));
+//                    db.Posts
+//                        .Where(
+//                            p => p.Title == "Caring for tropical fish"
+//                                 || p.Title == "Cat care 101")
+//                        .ToList()
+//                        .ForEach(p => db.Posts.Remove(p));
 
                     db.SaveChanges();
                 }
