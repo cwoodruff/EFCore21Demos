@@ -24,7 +24,7 @@ namespace Demos
                             foreach (var id in accountNumbers)
                             {
                                 // Use a regular auto-compiled query
-                                var customer = db.Customers.Single(c => c.AccountNumber == id);
+                                var customer = db.Customers.First(c => c.AccountNumber == id);
                             }
                         }
                     },
@@ -35,7 +35,7 @@ namespace Demos
                     {
                         // Create explicit compiled query
                         var query = EF.CompileQuery((AdventureWorksContext context, string id)
-                            => context.Customers.Single(c => c.AccountNumber == id));
+                            => context.Customers.First(c => c.AccountNumber == id));
 
                         using (var db = new AdventureWorksContext())
                         {
