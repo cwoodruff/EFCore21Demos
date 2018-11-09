@@ -45,40 +45,31 @@ namespace Demos
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Blog>(
-                entity =>
-                {
-                    entity.HasIndex(e => e.BlogId);
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity.Property(e => e.Url).IsRequired();
+            });
 
-                    entity.Property(e => e.Url)
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    //entity.HasMany<Post>();
-                }
-            );
-            
-            modelBuilder.Entity<Post>(
-                entity =>
-                {
-                    entity.HasIndex(e => e.PostId);
-
-                    entity.Property(e => e.Title)
-                        .IsRequired()
-                        .HasMaxLength(255);
-                    
-                    entity.Property(e => e.Content)
-                        .IsRequired();
-
-                    //entity.HasOne(e => e.Blog);
-                }
-            );
-            
+            #region BlogSeed
             modelBuilder.Entity<Blog>().HasData(new Blog {BlogId = 1, Url = "http://sample.com"});
-            
+            #endregion
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.HasOne(d => d.Blog)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey("BlogId");
+            });
+
+            #region PostSeed
             modelBuilder.Entity<Post>().HasData(
-                new {BlogId = 1, PostId = 1, Title = "First post", Content = "Test 1"},
-                new {BlogId = 1, PostId = 2, Title = "Second post", Content = "Test 2"});
+                new Post() { BlogId = 1, PostId = 1, Title = "First post", Content = "Test 1" });
+            #endregion
+
+            #region AnonymousPostSeed
+            modelBuilder.Entity<Post>().HasData(
+                new { BlogId = 1, PostId = 2, Title = "Second post", Content = "Test 2" });
+            #endregion
         }
 
         public DbSet<Blog> Blogs { get; set; }
@@ -106,8 +97,8 @@ namespace Demos
     public class Post
     {
         public int PostId { get; set; }
-        public string Title { get; set; }
         public string Content { get; set; }
+        public string Title { get; set; }
 
         public int BlogId { get; set; }
         public Blog Blog { get; set; }

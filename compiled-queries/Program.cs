@@ -37,7 +37,7 @@ namespace Demos
                         var query = EF.CompileQuery((AdventureWorksContext context, string id)
                             => context.Customers.First(c => c.AccountNumber == id));
 
-                        using (var db = new AdventureWorksContext())
+                        using (var db = new AdventureWorksContext()) 
                         {
                             foreach (var id in accountNumbers)
                             {
