@@ -47,6 +47,24 @@ namespace Demos
                         }
                     },
                 name: "Compiled");
+            
+            RunTest(
+                accountNumbers =>
+                {
+                    // Create explicit compiled query
+                    var query = EF.CompileAsyncQuery((AdventureWorksContext context, string id)
+                        => context.Customers.First(c => c.AccountNumber == id));
+
+                    using (var db = new AdventureWorksContext()) 
+                    {
+                        foreach (var id in accountNumbers)
+                        {
+                            // Invoke the compiled query
+                            var customer = query(db, id);
+                        }
+                    }
+                },
+                name: "Async Compiled");
         }
 
         private static void RunTest(Action<string[]> test, string name)
@@ -61,7 +79,6 @@ namespace Demos
             stopwatch.Stop();
 
             Console.WriteLine($"{name}:  {stopwatch.ElapsedMilliseconds.ToString().PadLeft(4)}ms");
-            Console.Read();
         }
 
         private static string[] GetAccountNumbers(int count)
