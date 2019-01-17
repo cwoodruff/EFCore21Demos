@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "linq-groupby", "linq-groupb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query-types", "query-types\query-types.csproj", "{8779F4D9-BDF6-433B-A860-D95A367BD6E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spatial", "spatial\spatial.csproj", "{7BCE8D9A-C46F-4477-9B57-3A90E303E807}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query-tags", "query-tags\query-tags.csproj", "{74239B6B-CB48-4BFB-9035-AC4424DED347}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{8779F4D9-BDF6-433B-A860-D95A367BD6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8779F4D9-BDF6-433B-A860-D95A367BD6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8779F4D9-BDF6-433B-A860-D95A367BD6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BCE8D9A-C46F-4477-9B57-3A90E303E807}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BCE8D9A-C46F-4477-9B57-3A90E303E807}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BCE8D9A-C46F-4477-9B57-3A90E303E807}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BCE8D9A-C46F-4477-9B57-3A90E303E807}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74239B6B-CB48-4BFB-9035-AC4424DED347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74239B6B-CB48-4BFB-9035-AC4424DED347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74239B6B-CB48-4BFB-9035-AC4424DED347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74239B6B-CB48-4BFB-9035-AC4424DED347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
