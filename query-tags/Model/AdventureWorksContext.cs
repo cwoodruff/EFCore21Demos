@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using query_tags.Model;
+using Microsoft.Extensions.Logging;
 
 namespace query_tags.Model
 {
@@ -8,7 +8,8 @@ namespace query_tags.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;");
+                .UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;")
+                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

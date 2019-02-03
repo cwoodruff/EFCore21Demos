@@ -9,7 +9,7 @@ namespace Performance.EFCore
         {
             optionsBuilder.UseLazyLoadingProxies()
                 .UseSqlServer("data source=.;initial catalog=AdventureWorks2014;integrated security=True;MultipleActiveResultSets=True;")
-                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));;
+                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

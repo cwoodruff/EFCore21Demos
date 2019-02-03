@@ -5,7 +5,7 @@ using query_tags.Model;
 
 namespace query_tags
 {
-    public class Program
+    public static class Program
     {
         private static void Main()
         {
@@ -21,7 +21,12 @@ namespace query_tags
                         Min = g.Min(o => o.ScrappedQty),
                         Max = g.Max(o => o.ScrappedQty),
                         Avg = g.Average(o => o.ScrappedQty)
-                    }).TagWith("WorkOrder Query from Query Tag demo");
+                    })
+                    .TagWith("Description: WorkOrder Query from Query Tag demo")
+                    .TagWith("Query located: query_tags.Program.Main method")
+                    .TagWith(
+                        @"Parameters:
+                        None");
 
                 foreach (var workorder in workorders)
                 {
