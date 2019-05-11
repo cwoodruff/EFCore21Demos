@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "like", "like\like.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "query-filters", "query-filters\query-filters.csproj", "{0200CF5E-599F-4DB9-9732-D1BA132E5F11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "data-seeding", "data-seeding\data-seeding.csproj", "{AB8C94BA-CD6B-4765-9376-769663B69C6E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lazy-loading", "lazy-loading\lazy-loading.csproj", "{32533807-3312-4347-880C-E35F92CCBF89}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "linq-groupby", "linq-groupby\linq-groupby.csproj", "{7D22BEF9-2DF2-4DE0-8DB7-B5B619E26A99}"
@@ -51,10 +49,6 @@ Global
 		{0200CF5E-599F-4DB9-9732-D1BA132E5F11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0200CF5E-599F-4DB9-9732-D1BA132E5F11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0200CF5E-599F-4DB9-9732-D1BA132E5F11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AB8C94BA-CD6B-4765-9376-769663B69C6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AB8C94BA-CD6B-4765-9376-769663B69C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AB8C94BA-CD6B-4765-9376-769663B69C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AB8C94BA-CD6B-4765-9376-769663B69C6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{32533807-3312-4347-880C-E35F92CCBF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32533807-3312-4347-880C-E35F92CCBF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32533807-3312-4347-880C-E35F92CCBF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
