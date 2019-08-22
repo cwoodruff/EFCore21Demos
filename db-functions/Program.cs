@@ -19,7 +19,7 @@ namespace Demos
 
                 foreach (var count in counts)
                 {
-                    Console.WriteLine(count);
+                    Console.WriteLine("Number of Post for Blog is " + count);
                 }
             }
 

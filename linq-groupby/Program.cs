@@ -24,7 +24,8 @@ namespace Demos
 
                 foreach (var workorder in workorders)
                 {
-                    Console.WriteLine(workorder.ProductID + ", " + workorder.Sum);
+                    Console.WriteLine("Product " + workorder.ProductID + ", Scrapped Sum " + workorder.Sum +
+                                      " Scrapped Reason " + workorder.ScrapReasonID);
                 }
             }
 
