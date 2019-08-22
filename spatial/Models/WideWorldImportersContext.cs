@@ -14,7 +14,7 @@ namespace spatial.Models
             : base(options)
         {
         }
-        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -269,7 +269,8 @@ namespace spatial.Models
 
                 entity.Property(e => e.InvoiceId).HasColumnName("InvoiceID");
 
-                entity.Property(e => e.IsFinalized).HasComputedColumnSql("(case when [FinalizationDate] IS NULL then CONVERT([bit],(0)) else CONVERT([bit],(1)) end)");
+                entity.Property(e => e.IsFinalized).HasComputedColumnSql(
+                    "(case when [FinalizationDate] IS NULL then CONVERT([bit],(0)) else CONVERT([bit],(1)) end)");
 
                 entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("(sysdatetime())");
 
@@ -346,7 +347,7 @@ namespace spatial.Models
                 entity.HasIndex(e => e.PrimaryContactPersonId)
                     .HasName("FK_Sales_Customers_PrimaryContactPersonID");
 
-                entity.HasIndex(e => new { e.PrimaryContactPersonId, e.IsOnCreditHold, e.CustomerId, e.BillToCustomerId })
+                entity.HasIndex(e => new {e.PrimaryContactPersonId, e.IsOnCreditHold, e.CustomerId, e.BillToCustomerId})
                     .HasName("IX_Sales_Customers_Perf_20160301_06");
 
                 entity.Property(e => e.CustomerId)
@@ -593,7 +594,7 @@ namespace spatial.Models
                 entity.HasIndex(e => e.SalespersonPersonId)
                     .HasName("FK_Sales_Invoices_SalespersonPersonID");
 
-                entity.HasIndex(e => new { e.ConfirmedReceivedBy, e.ConfirmedDeliveryTime })
+                entity.HasIndex(e => new {e.ConfirmedReceivedBy, e.ConfirmedDeliveryTime})
                     .HasName("IX_Sales_Invoices_ConfirmedDeliveryTime");
 
                 entity.Property(e => e.InvoiceId)
@@ -604,7 +605,8 @@ namespace spatial.Models
 
                 entity.Property(e => e.BillToCustomerId).HasColumnName("BillToCustomerID");
 
-                entity.Property(e => e.ConfirmedDeliveryTime).HasComputedColumnSql("(TRY_CONVERT([datetime2](7),json_value([ReturnedDeliveryData],N'$.DeliveredWhen'),(126)))");
+                entity.Property(e => e.ConfirmedDeliveryTime).HasComputedColumnSql(
+                    "(TRY_CONVERT([datetime2](7),json_value([ReturnedDeliveryData],N'$.DeliveredWhen'),(126)))");
 
                 entity.Property(e => e.ConfirmedReceivedBy)
                     .HasMaxLength(4000)
@@ -699,13 +701,13 @@ namespace spatial.Models
                 entity.HasIndex(e => e.PackageTypeId)
                     .HasName("FK_Sales_OrderLines_PackageTypeID");
 
-                entity.HasIndex(e => new { e.PickedQuantity, e.StockItemId })
+                entity.HasIndex(e => new {e.PickedQuantity, e.StockItemId})
                     .HasName("IX_Sales_OrderLines_AllocatedStockItems");
 
-                entity.HasIndex(e => new { e.OrderId, e.PickedQuantity, e.StockItemId, e.PickingCompletedWhen })
+                entity.HasIndex(e => new {e.OrderId, e.PickedQuantity, e.StockItemId, e.PickingCompletedWhen})
                     .HasName("IX_Sales_OrderLines_Perf_20160301_02");
 
-                entity.HasIndex(e => new { e.Quantity, e.StockItemId, e.PickingCompletedWhen, e.OrderId, e.OrderLineId })
+                entity.HasIndex(e => new {e.Quantity, e.StockItemId, e.PickingCompletedWhen, e.OrderId, e.OrderLineId})
                     .HasName("IX_Sales_OrderLines_Perf_20160301_01");
 
                 entity.Property(e => e.OrderLineId)
@@ -897,7 +899,7 @@ namespace spatial.Models
                 entity.HasIndex(e => e.IsSalesperson)
                     .HasName("IX_Application_People_IsSalesperson");
 
-                entity.HasIndex(e => new { e.FullName, e.EmailAddress, e.IsPermittedToLogon, e.PersonId })
+                entity.HasIndex(e => new {e.FullName, e.EmailAddress, e.IsPermittedToLogon, e.PersonId})
                     .HasName("IX_Application_People_Perf_20160301_05");
 
                 entity.Property(e => e.PersonId)
@@ -914,7 +916,8 @@ namespace spatial.Models
 
                 entity.Property(e => e.LogonName).HasMaxLength(50);
 
-                entity.Property(e => e.OtherLanguages).HasComputedColumnSql("(json_query([CustomFields],N'$.OtherLanguages'))");
+                entity.Property(e => e.OtherLanguages)
+                    .HasComputedColumnSql("(json_query([CustomFields],N'$.OtherLanguages'))");
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(20);
 
@@ -950,7 +953,7 @@ namespace spatial.Models
                 entity.HasIndex(e => e.StockItemId)
                     .HasName("FK_Purchasing_PurchaseOrderLines_StockItemID");
 
-                entity.HasIndex(e => new { e.OrderedOuters, e.ReceivedOuters, e.IsOrderLineFinalized, e.StockItemId })
+                entity.HasIndex(e => new {e.OrderedOuters, e.ReceivedOuters, e.IsOrderLineFinalized, e.StockItemId})
                     .HasName("IX_Purchasing_PurchaseOrderLines_Perf_20160301_4");
 
                 entity.Property(e => e.PurchaseOrderLineId)
@@ -1254,11 +1257,11 @@ namespace spatial.Models
 
                 entity.ToTable("StockItemStockGroups", "Warehouse");
 
-                entity.HasIndex(e => new { e.StockGroupId, e.StockItemId })
+                entity.HasIndex(e => new {e.StockGroupId, e.StockItemId})
                     .HasName("UQ_StockItemStockGroups_StockGroupID_Lookup")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.StockItemId, e.StockGroupId })
+                entity.HasIndex(e => new {e.StockItemId, e.StockGroupId})
                     .HasName("UQ_StockItemStockGroups_StockItemID_Lookup")
                     .IsUnique();
 
@@ -1372,7 +1375,8 @@ namespace spatial.Models
                     .WithMany(p => p.StockItemTransactions)
                     .HasForeignKey(d => d.TransactionTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Warehouse_StockItemTransactions_TransactionTypeID_Application_TransactionTypes");
+                    .HasConstraintName(
+                        "FK_Warehouse_StockItemTransactions_TransactionTypeID_Application_TransactionTypes");
             });
 
             modelBuilder.Entity<StockItems>(entity =>
@@ -1520,7 +1524,8 @@ namespace spatial.Models
 
                 entity.Property(e => e.FinalizationDate).HasColumnType("date");
 
-                entity.Property(e => e.IsFinalized).HasComputedColumnSql("(case when [FinalizationDate] IS NULL then CONVERT([bit],(0)) else CONVERT([bit],(1)) end)");
+                entity.Property(e => e.IsFinalized).HasComputedColumnSql(
+                    "(case when [FinalizationDate] IS NULL then CONVERT([bit],(0)) else CONVERT([bit],(1)) end)");
 
                 entity.Property(e => e.LastEditedWhen).HasDefaultValueSql("(sysdatetime())");
 
@@ -1568,7 +1573,8 @@ namespace spatial.Models
                     .WithMany(p => p.SupplierTransactions)
                     .HasForeignKey(d => d.TransactionTypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Purchasing_SupplierTransactions_TransactionTypeID_Application_TransactionTypes");
+                    .HasConstraintName(
+                        "FK_Purchasing_SupplierTransactions_TransactionTypeID_Application_TransactionTypes");
             });
 
             modelBuilder.Entity<Suppliers>(entity =>

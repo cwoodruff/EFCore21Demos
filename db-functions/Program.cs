@@ -24,7 +24,6 @@ namespace Demos
             }
 
             Console.ReadLine();
-
         }
 
         private static void SetupDatabase()
@@ -42,12 +41,12 @@ namespace Demos
                             RETURN @ret
                           END");
 
-                    var fishBlog = new Blog { Url = "http://sample.com/blogs/fish" };
-                    fishBlog.Posts.Add(new Post { Title = "First Post!" });
+                    var fishBlog = new Blog {Url = "http://sample.com/blogs/fish"};
+                    fishBlog.Posts.Add(new Post {Title = "First Post!"});
                     db.Blogs.Add(fishBlog);
 
-                    db.Blogs.Add(new Blog { Url = "http://sample.com/blogs/catfish" });
-                    db.Blogs.Add(new Blog { Url = "http://sample.com/blogs/cats" });
+                    db.Blogs.Add(new Blog {Url = "http://sample.com/blogs/catfish"});
+                    db.Blogs.Add(new Blog {Url = "http://sample.com/blogs/cats"});
 
                     db.SaveChanges();
                 }
@@ -63,8 +62,10 @@ namespace Demos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
-                .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Demo.DbFunctions;Trusted_Connection=True;ConnectRetryCount=0")
-                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));
+                .UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=Demo.DbFunctions;Trusted_Connection=True;ConnectRetryCount=0")
+                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) =>
+                    l == LogLevel.Information && !s.EndsWith("Connection")));
         }
 
         [DbFunction(Schema = "dbo")]

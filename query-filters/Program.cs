@@ -49,9 +49,9 @@ namespace Demos
                             Url = "http://sample.com/blogs/fish",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Fish care 101", IsDeleted = false },
-                                new Post { Title = "Caring for tropical fish", IsDeleted = false },
-                                new Post { Title = "Types of ornamental fish", IsDeleted = true }
+                                new Post {Title = "Fish care 101", IsDeleted = false},
+                                new Post {Title = "Caring for tropical fish", IsDeleted = false},
+                                new Post {Title = "Types of ornamental fish", IsDeleted = true}
                             }
                         });
 
@@ -61,9 +61,9 @@ namespace Demos
                             Url = "http://sample.com/blogs/cats",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Cat care 101", IsDeleted = true },
-                                new Post { Title = "Caring for tropical cats", IsDeleted = false },
-                                new Post { Title = "Types of ornamental cats", IsDeleted = false }
+                                new Post {Title = "Cat care 101", IsDeleted = true},
+                                new Post {Title = "Caring for tropical cats", IsDeleted = false},
+                                new Post {Title = "Types of ornamental cats", IsDeleted = false}
                             }
                         });
 
@@ -77,8 +77,8 @@ namespace Demos
                                 Url = "http://sample.com/blogs/catfish",
                                 Posts = new List<Post>
                                 {
-                                    new Post { Title = "Catfish care 101", IsDeleted = false },
-                                    new Post { Title = "History of the catfish name", IsDeleted = false }
+                                    new Post {Title = "Catfish care 101", IsDeleted = false},
+                                    new Post {Title = "History of the catfish name", IsDeleted = false}
                                 }
                             });
 
@@ -115,7 +115,8 @@ namespace Demos
             optionsBuilder
                 .UseSqlServer(
                     @"Server=(localdb)\mssqllocaldb;Database=Demo.QueryFilters;Trusted_Connection=True;ConnectRetryCount=0;")
-                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));
+                .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) =>
+                    l == LogLevel.Information && !s.EndsWith("Connection")));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

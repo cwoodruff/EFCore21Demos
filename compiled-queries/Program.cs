@@ -18,36 +18,36 @@ namespace Demos
 
             RunTest(
                 accountNumbers =>
+                {
+                    using (var db = new AdventureWorksContext())
                     {
-                        using (var db = new AdventureWorksContext())
+                        foreach (var id in accountNumbers)
                         {
-                            foreach (var id in accountNumbers)
-                            {
-                                // Use a regular auto-compiled query
-                                var customer = db.Customers.First(c => c.AccountNumber == id);
-                            }
+                            // Use a regular auto-compiled query
+                            var customer = db.Customers.First(c => c.AccountNumber == id);
                         }
-                    },
+                    }
+                },
                 name: "Regular");
 
             RunTest(
                 accountNumbers =>
-                    {
-                        // Create explicit compiled query
-                        var query = EF.CompileQuery((AdventureWorksContext context, string id)
-                            => context.Customers.First(c => c.AccountNumber == id));
+                {
+                    // Create explicit compiled query
+                    var query = EF.CompileQuery((AdventureWorksContext context, string id)
+                        => context.Customers.First(c => c.AccountNumber == id));
 
-                        using (var db = new AdventureWorksContext()) 
+                    using (var db = new AdventureWorksContext())
+                    {
+                        foreach (var id in accountNumbers)
                         {
-                            foreach (var id in accountNumbers)
-                            {
-                                // Invoke the compiled query
-                                var customer = query(db, id);
-                            }
+                            // Invoke the compiled query
+                            var customer = query(db, id);
                         }
-                    },
+                    }
+                },
                 name: "Compiled");
-            
+
             RunTest(
                 accountNumbers =>
                 {
@@ -55,7 +55,7 @@ namespace Demos
                     var query = EF.CompileAsyncQuery((AdventureWorksContext context, string id)
                         => context.Customers.First(c => c.AccountNumber == id));
 
-                    using (var db = new AdventureWorksContext()) 
+                    using (var db = new AdventureWorksContext())
                     {
                         foreach (var id in accountNumbers)
                         {

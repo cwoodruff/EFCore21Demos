@@ -15,6 +15,7 @@ namespace query_types
             using (var db = new BloggingContext())
             {
                 #region Query
+
                 var postCounts = db.BlogPostCounts.ToList();
 
                 foreach (var postCount in postCounts)
@@ -22,6 +23,7 @@ namespace query_types
                     Console.WriteLine($"{postCount.BlogName} has {postCount.PostCount} posts.");
                     Console.WriteLine();
                 }
+
                 #endregion
             }
         }
@@ -39,9 +41,9 @@ namespace query_types
                             Url = "http://sample.com/blogs/fish",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Fish care 101" },
-                                new Post { Title = "Caring for tropical fish" },
-                                new Post { Title = "Types of ornamental fish" }
+                                new Post {Title = "Fish care 101"},
+                                new Post {Title = "Caring for tropical fish"},
+                                new Post {Title = "Types of ornamental fish"}
                             }
                         });
 
@@ -52,9 +54,9 @@ namespace query_types
                             Url = "http://sample.com/blogs/cats",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Cat care 101" },
-                                new Post { Title = "Caring for tropical cats" },
-                                new Post { Title = "Types of ornamental cats" }
+                                new Post {Title = "Cat care 101"},
+                                new Post {Title = "Caring for tropical cats"},
+                                new Post {Title = "Types of ornamental cats"}
                             }
                         });
 
@@ -65,19 +67,21 @@ namespace query_types
                             Url = "http://sample.com/blogs/catfish",
                             Posts = new List<Post>
                             {
-                                new Post { Title = "Catfish care 101" },
-                                new Post { Title = "History of the catfish name" }
+                                new Post {Title = "Catfish care 101"},
+                                new Post {Title = "History of the catfish name"}
                             }
                         });
 
                     db.SaveChanges();
 
                     #region View
+
                     db.Database.ExecuteSqlCommand(
                         @"CREATE VIEW View_BlogPostCounts AS 
                             SELECT Name, Count(p.PostId) as PostCount from Blogs b
                             JOIN Posts p on p.BlogId = b.BlogId
                             GROUP BY b.Name");
+
                     #endregion
                 }
             }
@@ -103,16 +107,19 @@ namespace query_types
         }
 
         #region Configuration
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Query<BlogPostsCount>().ToView("View_BlogPostCounts")
                 .Property(v => v.BlogName).HasColumnName("Name");
         }
+
         #endregion
     }
 
     #region Entities
+
     public class Blog
     {
         public int BlogId { get; set; }
@@ -128,13 +135,16 @@ namespace query_types
         public string Content { get; set; }
         public int BlogId { get; set; }
     }
+
     #endregion
 
     #region QueryType
+
     public class BlogPostsCount
     {
         public string BlogName { get; set; }
         public int PostCount { get; set; }
     }
+
     #endregion
 }

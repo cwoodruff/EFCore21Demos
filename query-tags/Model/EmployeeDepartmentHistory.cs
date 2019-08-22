@@ -1,7 +1,4 @@
-﻿
-
-
-using System;
+﻿using System;
 using query_tags.Model;
 
 namespace query_tags.Model

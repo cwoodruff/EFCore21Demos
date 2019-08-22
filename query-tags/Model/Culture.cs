@@ -14,6 +14,10 @@ namespace query_tags.Model
         public string Name { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture { get; set; }
+        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture
+        {
+            get;
+            set;
+        }
     }
 }

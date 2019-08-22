@@ -20,7 +20,7 @@ namespace Demos
         public static long InstanceCount;
 
         public BloggingContext(DbContextOptions options)
-            : base(options) 
+            : base(options)
             => Interlocked.Increment(ref InstanceCount);
 
         public DbSet<Blog> Blogs { get; set; }
@@ -82,8 +82,8 @@ namespace Demos
 
                 if (context.Database.EnsureCreated())
                 {
-                    context.Blogs.Add(new Blog { Name = "The Dog Blog", Url = "http://sample.com/dogs" });
-                    context.Blogs.Add(new Blog { Name = "The Cat Blog", Url = "http://sample.com/cats" });
+                    context.Blogs.Add(new Blog {Name = "The Dog Blog", Url = "http://sample.com/dogs"});
+                    context.Blogs.Add(new Blog {Name = "The Cat Blog", Url = "http://sample.com/cats"});
                     context.SaveChanges();
                 }
             }

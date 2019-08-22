@@ -21,6 +21,11 @@ namespace query_tags.Model
 
         public virtual ICollection<Product> Product { get; set; }
         public virtual ICollection<ProductModelIllustration> ProductModelIllustration { get; set; }
-        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture { get; set; }
+
+        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture
+        {
+            get;
+            set;
+        }
     }
 }

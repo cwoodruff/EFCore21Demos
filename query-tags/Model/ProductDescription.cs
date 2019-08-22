@@ -15,6 +15,10 @@ namespace query_tags.Model
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture { get; set; }
+        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture
+        {
+            get;
+            set;
+        }
     }
 }

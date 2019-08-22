@@ -1,7 +1,4 @@
-﻿
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Performance.EFCore
@@ -18,6 +15,10 @@ namespace Performance.EFCore
         public Guid rowguid { get; set; }
         public DateTime ModifiedDate { get; set; }
 
-        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture { get; set; }
+        public virtual ICollection<ProductModelProductDescriptionCulture> ProductModelProductDescriptionCulture
+        {
+            get;
+            set;
+        }
     }
 }

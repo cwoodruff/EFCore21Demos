@@ -31,9 +31,9 @@ namespace Demos
             {
                 if (db.Database.EnsureCreated())
                 {
-                    db.Blogs.Add(new Blog { Url = "http://sample.com/blogs/fish" });
-                    db.Blogs.Add(new Blog { Url = "http://sample.com/blogs/catfish" });
-                    db.Blogs.Add(new Blog { Url = "http://sample.com/blogs/cats" });
+                    db.Blogs.Add(new Blog {Url = "http://sample.com/blogs/fish"});
+                    db.Blogs.Add(new Blog {Url = "http://sample.com/blogs/catfish"});
+                    db.Blogs.Add(new Blog {Url = "http://sample.com/blogs/cats"});
                     db.SaveChanges();
                 }
             }
@@ -60,7 +60,8 @@ namespace Demos
             {
                 optionsBuilder.UseSqlServer(
                         @"Server=(localdb)\mssqllocaldb;Database=Demo.Like;Trusted_Connection=True;ConnectRetryCount=0")
-                    .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) => l == LogLevel.Information && !s.EndsWith("Connection")));
+                    .UseLoggerFactory(new LoggerFactory().AddConsole((s, l) =>
+                        l == LogLevel.Information && !s.EndsWith("Connection")));
             }
         }
     }
